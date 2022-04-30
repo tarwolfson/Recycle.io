@@ -6,7 +6,7 @@ services:
     volumes:
       - ~/apps/mongo:/data/db
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=citizix
+      - MONGO_INITDB_ROOT_USERNAME=recycleio
       - MONGO_INITDB_ROOT_PASSWORD=S3cret
   cache-updater:
     build: ./cache-updater
@@ -18,7 +18,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
+      - 5000:5000
     volumes:
       - .:/code
     depends_on:

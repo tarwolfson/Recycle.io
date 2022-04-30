@@ -4,9 +4,9 @@ import redis
 import pymongo
 import logging
 
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host='redis', port=6379, db=0)
 s = sched.scheduler(time.time, time.sleep)
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://mongodb:27017/", username="recycleio", password="S3cret")
 mydb = myclient["recycleio"]
 mycol = mydb["items"]
 
