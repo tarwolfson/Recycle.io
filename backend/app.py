@@ -1,18 +1,15 @@
 from flask import Flask, jsonify, request
 import redis
+import json
 
 app = Flask(__name__)
 r = redis.Redis(host='redis', port=6379, db=0)
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
 @app.route("/item/<name>")
 def get_item(name: str):
     ans = r.get(name)
-    return jsonify(ans.decode())
+    return jsonify(json.loads(ans.decode()))
 
 
 if __name__=="__main__":

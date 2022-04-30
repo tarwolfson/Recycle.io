@@ -3,6 +3,7 @@ import time
 import redis
 import pymongo
 import logging
+import json
 
 r = redis.Redis(host='redis', port=6379, db=0)
 s = sched.scheduler(time.time, time.sleep)
@@ -11,9 +12,10 @@ mydb = myclient["recycleio"]
 mycol = mydb["items"]
 
 def update():
-    mongo_items = [{"name": x["name"], "value": x["value"] } for x in mycol.find()]
+    mongo_items = [x for x in mycol.find()]
     for item in mongo_items:
-        r.set(item["name"], item["value"])
+        del item["_id"]
+        r.set(item["name"], json.dumps(item))
     print(mongo_items)
 
     s.enter(5, 1, update, ())
@@ -21,4 +23,3 @@ def update():
 
 s.enter(5, 1, update, ())
 s.run()
-logging.info("Started cache updater")
