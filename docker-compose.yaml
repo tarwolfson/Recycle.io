@@ -3,6 +3,8 @@ services:
     image: mongo:latest
     ports:
       - 27017:27017
+    expose:
+      - 27017
     volumes:
       - ~/apps/mongo:/data/db
     environment:
@@ -10,17 +12,13 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=S3cret
   cache-updater:
     build: ./cache-updater
-    volumes: 
-      - .:/code
     depends_on:
       - redis
       - mongodb
   backend:
     build: ./backend
     ports:
-      - 5000:5000
-    volumes:
-      - .:/code
+      - 5050:5000
     depends_on:
       - redis
       - mongodb
