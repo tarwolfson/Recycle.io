@@ -11,9 +11,9 @@ def hello_world():
 
 @app.route("/item/<name>")
 def get_item(name: str):
-    r.get(name)
-    return jsonify({ "name": name })
+    ans = r.get(name)
+    return jsonify(ans.decode())
 
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
