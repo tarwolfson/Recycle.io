@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    volumes:
+      - ~/apps/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=recycleio
+      - MONGO_INITDB_ROOT_PASSWORD=S3cret
+  cache-updater:
+    build: ./cache-updater
+    depends_on:
+      - redis
+      - mongodb
+  backend:
+    build: ./backend
+    ports:
+      - 5050:5000
+    depends_on:
+      - redis
+      - mongodb
+      - cache-updater
+  redis:
+    image: redis
