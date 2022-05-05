@@ -11,6 +11,11 @@ def get_item(name: str):
     ans = r.get(name)
     return jsonify(json.loads(ans.decode()))
 
+@app.route("/items")
+def get_items():
+    items = [json.loads(r.get(item).decode()) for item in r.scan_iter()]
+    return jsonify(items)
+
 
 if __name__=="__main__":
     app.run(host='0.0.0.0', port=5000)
