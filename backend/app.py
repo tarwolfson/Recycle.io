@@ -1,20 +1,18 @@
-from flask import Flask, jsonify, request
-import redis
-import json
+from flask import Flask, jsonify
+
+from Data.Providers import ItemProviderRedis
 
 app = Flask(__name__)
-r = redis.Redis(host='redis', port=6379, db=0)
+provider = ItemProviderRedis()
 
 
 @app.route("/item/<name>")
-def get_item(name: str):
-    ans = r.get(name)
-    return jsonify(json.loads(ans.decode()))
+def get_item(name: str) -> dict:
+    return jsonify(provider.get(name))
 
 @app.route("/items")
-def get_items():
-    items = [json.loads(r.get(item).decode()) for item in r.scan_iter()]
-    return jsonify(items)
+def get_items() -> dict:
+    return jsonify(provider.get_all())
 
 
 if __name__=="__main__":
