@@ -1,8 +1,11 @@
 from flask import Flask, jsonify
+from flask_cors import CORS, cross_origin
 
 from Data.Providers import ItemProviderRedis
 
 app = Flask(__name__)
+app = Flask(__name__)
+CORS(app)
 provider = ItemProviderRedis()
 
 
