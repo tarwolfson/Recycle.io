@@ -1,23 +1,28 @@
 [
 	{
-		"trash_name": "בקבוק זכוכית" ,
-		"trash": "פח כתום - זכוכיות"
+		"name": "Glass Bottle" ,
+		"trash": "Orange",
+		"purpose": "Glass"
 	},
 	{
-		"trash_name": "בקבוק פלסטיק" ,
-		"trash": "פח סגול - פלסטיק"
+		"name": "Plastic Bottle" ,
+		"trash": "Purple",
+		"purpose": "Plastic"
 	},
 	{
-		"trash_name": "גלידה" ,
-		"trash": "פח ירוק - אורגני"
+		"name": "Icecream" ,
+		"trash": "Green",
+		"purpose": "Organic"
 	},
 	{
-		"trash_name": "ביצים" ,
-		"trash": "פח ירוק - אורגני"
+		"name": "Eggs" ,
+		"trash": "Green",
+		"purpose": "Organic"
 	},
 	{
-		"trash_name": "שאריות" ,
-		"trash": "פח ירוק - אורגני"
+		"name": "Leftovers" ,
+		"trash": "Green",
+		"purpose": "Organic"
 	}	
 ]
 

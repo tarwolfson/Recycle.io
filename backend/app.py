@@ -11,7 +11,7 @@ provider = ItemProviderRedis()
 
 @app.route("/item/<name>")
 def get_item(name: str) -> dict:
-    return jsonify(provider.get(name))
+    return (provider.get(name))
 
 @app.route("/items")
 def get_items() -> dict:

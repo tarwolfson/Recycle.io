@@ -8,78 +8,74 @@ const Home = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [BackendData, setBackendData] = useState();
+  const [Reply, setReply] = useState("Nothing");
 
-  
-  // Get data from Backend Server --- Tar
-  //useEffect(() => {
-    //const getData = async () => {
-      //---------------------------------------------------------//
-      // Backend Server with JSON address should be here
-      //---------------------------------------------------------//
-      /*const apiResponse = await fetch(
-        
-      );
-      const data = await apiResponse.json(); */
+  var imageURL
 
-      //---------------------------------------------------------//
-      // Delete this when Backend Server data is ready
-      //---------------------------------------------------------//
+  function imageDisplay (item)  {
+    console.log("Item is: "+item)
+    if (item = 'Orange'){
+        item = ('../components/Orange.png')
+        imageURL = item
+        console.log("Should have updated imageURL to: "+item)
+    }
+  }
 
-
-      //setBackendData(data);
-    //};
-    //getData();
-  //}, []);
-
+  if(Reply == "Nothing"){
   return (
     <View style={ styles.container }>
         <ImageBackground source={require('../components/BackgroundImage.jpeg')} style={styles.backgroundImage} >
-          <View style={ styles.root}>
-            {!clicked && <Text style={styles.title}>Trash</Text>}
+          <View>
+            {!clicked && <Text style={styles.title}></Text>}
             <SearchBar
               searchPhrase={searchPhrase}
               setSearchPhrase={setSearchPhrase}
               clicked={clicked}
               setClicked={setClicked}
+              Reply = {Reply}
+              setReply = {setReply}
+              
             />
-           {(
-            <List
-              searchPhrase={searchPhrase}
-              data={BackendData}
-              setClicked={setClicked}
-            />    
-           )}
+            {console.log("HomePage info:"+Reply)}
+            {/* {imageDisplay(Reply)} */}
             </View>
         </ImageBackground>
-      </View>
-      /*
-    <ImageBackground source={require('../components/BackgroundImage.jpeg')} style={{width: '100%', height: '100%',}}>
-    <View style={styles.root}>
-      {!clicked && <Text style={styles.title}>Trash</Text>}
-      <SearchBar
-        searchPhrase={searchPhrase}
-        setSearchPhrase={setSearchPhrase}
-        clicked={clicked}
-        setClicked={setClicked}
-      />
-      {(
-          <List
-            searchPhrase={searchPhrase}
-            data={BackendData}
-            setClicked={setClicked}
-          />
 
-      )}
-    </View>
-    </ImageBackground> */
+          <img alt="Day Night" src={require('../components/BackgroundImage.jpeg')}/>
+      </View>
   );
-};
+}
+else{
+  return (
+    <View style={ styles.container }>
+        <ImageBackground source={require('../components/BackgroundImage.jpeg')} style={styles.backgroundImage} >
+          <View>
+            {!clicked && <Text style={styles.title}></Text>}
+            <SearchBar
+              searchPhrase={searchPhrase}
+              setSearchPhrase={setSearchPhrase}
+              clicked={clicked}
+              setClicked={setClicked}
+              Reply = {Reply}
+              setReply = {setReply}
+              
+            />
+            {console.log("HomePage info:"+Reply)}
+            {/* {imageDisplay(Reply)} */}
+            </View>
+        </ImageBackground>
+
+          <img alt="Day Night" src={require('../components/BackgroundImage.jpeg')}/>
+          //<Text> Throw to : {Reply}</Text>
+      </View>
+  );
+}
+}
+
 
 const styles = StyleSheet.create({
   root: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent:'stretch'
+
   },
   title: {
     marginTop: 30,
@@ -88,13 +84,16 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   container: {
-    flex: 1,
+
   },
 
   backgroundImage: {
+    backgroundPosition: 'center',
+    backgroundSize: 'stratch',
+    backgroundRepeat: 'repeat',
     flex: 1,
     resizeMode: 'stretch', // or 'stretch',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
     fontSize: 30,

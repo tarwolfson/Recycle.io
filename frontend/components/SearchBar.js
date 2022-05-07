@@ -1,9 +1,26 @@
 import React from "react";
 import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
-import { Alert } from "react-native-web";
 
-const SearchBar = ({clicked, searchPhrase, setSearchPhrase, setClicked}) => {
+
+// function getData(ItemName) {
+//   let url = 'http://localhost:5050/item/'+ItemName+''
+//   console.log(url)
+//   return fetch(url)
+//   .then((response) => response.json())
+//   .then((responseJson) => {
+//     console.log("Got From DB: "+JSON.stringify(responseJson))
+//     var data = JSON.stringify(responseJson)
+//     return data;
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+// }
+
+
+const SearchBar = ({ clicked, searchPhrase, setSearchPhrase, setClicked , Reply, setReply }) => {
+  //searchPhrase = 'Glass Bottle'
   return (
     <View style={styles.container}>
       <View
@@ -23,15 +40,28 @@ const SearchBar = ({clicked, searchPhrase, setSearchPhrase, setClicked}) => {
           value={searchPhrase}
           onChangeText={setSearchPhrase}
           onFocus={() => {
-            console.log('focus search bar')
             setClicked(true);
           }}
+          onKeyPress={event => {
+            if (event.key === 'Enter') {
+              let url = 'http://localhost:5050/item/'+searchPhrase+''
+              console.log(url)
+              return fetch(url)
+              .then((response) => response.json())
+              .then((responseJson) => {
+                console.log("Got From DB: "+JSON.stringify(responseJson))
+                var data = JSON.stringify(responseJson.trash)
+              setReply(data)
+              Reply = data;
+            })
+            }
+          }}
         />
-        {/* x Icon */}
+        {/* x - Cancel Icon */}
         {clicked && (
-          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
-              setSearchPhrase("")
-          }}/>
+          <Entypo name="cross" size={18} color="black" style={{ padding: 1 }} onPress={() => {
+            setSearchPhrase("")
+          }} />
         )}
       </View>
       {/* cancel button */}
@@ -48,6 +78,8 @@ const SearchBar = ({clicked, searchPhrase, setSearchPhrase, setClicked}) => {
       )}
     </View>
   );
+
+
 };
 export default SearchBar;
 
@@ -70,8 +102,9 @@ const styles = StyleSheet.create({
   },
   searchBar__clicked: {
     padding: 10,
+    //paddingTop:80,
     flexDirection: "row",
-    width: "80%",
+    width: "95%",
     backgroundColor: "#d9dbda",
     borderRadius: 15,
     alignItems: "center",
