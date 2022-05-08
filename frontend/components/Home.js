@@ -43,6 +43,7 @@ const Home = () => {
 
           <img alt="Day Night" src={require('../components/BackgroundImage.jpeg')}/>
       </View>
+      
   );
 }
 else{
